@@ -27,10 +27,8 @@ class LyricsSpider(BaseSpider):
        title = hxs.select('//title/text()').extract()[0]
        filename = self.dir_name + title+'.txt'
        f = codecs.open(filename, encoding='utf-8', mode='w')
-       sites = hxs.select('//br')
-       rootpath = "./";
-       for site in sites:
-           line = site.extract()
+       lines = hxs.select('//br').extract()
+       for line in lines:
            if line.find('\n') != -1:
                text = line.split('\n')[-1]
                text = unicodedata.normalize('NFKD', text)
